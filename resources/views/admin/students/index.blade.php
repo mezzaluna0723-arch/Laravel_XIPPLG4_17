@@ -27,6 +27,7 @@
                     <td>{{ $student->nama_lengkap }}</td>
                     <td>{{ $student->jenis_kelamin }}</td>
                     <td>{{ $student->nisn }}</td>
+                    
                     <td>
                         <a href="{{ route('admin.students.edit', $student->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('admin.students.destroy', $student->id) }}" method="POST" class="d-inline">
