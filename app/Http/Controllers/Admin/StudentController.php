@@ -32,6 +32,11 @@ class StudentController extends Controller
         return redirect()->route('admin.students.index')->with('success', 'Data berhasil ditambah!');
     }
 
+    public function show(Student $student)
+    {
+        return view('admin.students.show', compact('student'));
+    }
+
     // ✏️ Menampilkan form edit
     public function edit(Student $student)
     {
