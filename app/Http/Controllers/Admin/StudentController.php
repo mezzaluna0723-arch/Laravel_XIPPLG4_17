@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -10,12 +11,12 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('students.index', compact('students'));
+        return view('admin.students.index', compact('students'));
     }
 
     public function create()
     {
-        return view('students.create');
+        return view('admin.students.create');
     }
 
     public function store(Request $request)
@@ -28,6 +29,6 @@ class StudentController extends Controller
         ]);
 
         Student::create($request->all());
-        return redirect()->route('students.index')->with('success','Data berhasil ditambah!');
+        return redirect()->route('admin.students.index')->with('success', 'Data berhasil ditambah!');
     }
 }
