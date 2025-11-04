@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Siswa</title>
+</head>
+<body>
+
+<h2>Data Siswa</h2>
+
+<a href="{{ route('students.create') }}">+ Tambah Siswa</a>
+<br><br>
+
+@if (session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>NIS</th>
+        <th>Nama</th>
+        <th>Jenis Kelamin</th>
+        <th>NISN</th>
+        <th>Aksi</th>
+    </tr>
+
+    @foreach ($students as $student)
+    <tr>
+        <td>{{ $student->id }}</td>
+        <td>{{ $student->nis }}</td>
+        <td>{{ $student->nama_lengkap }}</td>
+        <td>{{ $student->jenis_kelamin }}</td>
+        <td>{{ $student->nisn }}</td>
+        <td>
+            <a href="{{ route('students.show', $student->id) }}">Detail</a> |
+            <a href="{{ route('students.edit', $student->id) }}">Edit</a> |
+            <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Hapus</button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</table>
+
+</body>
+</html>
