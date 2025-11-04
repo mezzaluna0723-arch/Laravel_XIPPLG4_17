@@ -32,30 +32,25 @@ class StudentController extends Controller
         return redirect()->route('admin.students.index')->with('success', 'Data berhasil ditambah!');
     }
 
-    // 🆕 Tambahkan function EDIT
-    public function edit($id)
+    // ✏️ Menampilkan form edit
+    public function edit(Student $student)
     {
-        // Ambil data student berdasarkan ID
-        $student = Student::findOrFail($id);
-
-        // Kirim ke view edit
         return view('admin.students.edit', compact('student'));
     }
 
-    // 🆕 Tambahkan function UPDATE
-    public function update(Request $request, $id)
+    // 💾 Menyimpan hasil edit ke database
+    public function update(Request $request, Student $student)
     {
-        $student = Student::findOrFail($id);
-
-        $request->validate([
-            'nis' => 'required|unique:students,nis,' . $id,
+        $validated = $request->validate([
+            'nis' => 'required',
             'nama_lengkap' => 'required',
             'jenis_kelamin' => 'required',
             'nisn' => 'required',
         ]);
 
-        $student->update($request->all());
+        $student->update($validated);
 
-        return redirect()->route('admin.students.index')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('admin.students.index')
+            ->with('success', 'Data siswa berhasil diperbarui');
     }
 }
