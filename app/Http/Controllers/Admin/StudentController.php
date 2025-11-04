@@ -31,4 +31,31 @@ class StudentController extends Controller
         Student::create($request->all());
         return redirect()->route('admin.students.index')->with('success', 'Data berhasil ditambah!');
     }
+
+    // 🆕 Tambahkan function EDIT
+    public function edit($id)
+    {
+        // Ambil data student berdasarkan ID
+        $student = Student::findOrFail($id);
+
+        // Kirim ke view edit
+        return view('admin.students.edit', compact('student'));
+    }
+
+    // 🆕 Tambahkan function UPDATE
+    public function update(Request $request, $id)
+    {
+        $student = Student::findOrFail($id);
+
+        $request->validate([
+            'nis' => 'required|unique:students,nis,' . $id,
+            'nama_lengkap' => 'required',
+            'jenis_kelamin' => 'required',
+            'nisn' => 'required',
+        ]);
+
+        $student->update($request->all());
+
+        return redirect()->route('admin.students.index')->with('success', 'Data berhasil diperbarui!');
+    }
 }
