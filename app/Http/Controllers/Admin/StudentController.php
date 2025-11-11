@@ -37,13 +37,13 @@ class StudentController extends Controller
         return view('admin.students.show', compact('student'));
     }
 
-    // ✏️ Menampilkan form edit
+    //  Menampilkan form edit
     public function edit(Student $student)
     {
         return view('admin.students.edit', compact('student'));
     }
 
-    // 💾 Menyimpan hasil edit ke database
+    // Menyimpan hasil edit ke database
     public function update(Request $request, Student $student)
     {
         $validated = $request->validate([
