@@ -49,7 +49,9 @@ class AttendanceController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        $students = Student::all();
+        return view('admin.attendances.edit', compact('attendance', 'students'));
     }
 
     /**
@@ -57,7 +59,9 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+        $attendance->update($request->all());
+        return redirect()->route('admin.attendances.index');
     }
 
     /**
