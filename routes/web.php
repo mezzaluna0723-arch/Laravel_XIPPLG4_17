@@ -11,4 +11,6 @@ Route::get('/', function () {
 // Group route untuk admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('students', StudentController::class);
+    Route::resource('admin/attendances', App\Http\Controllers\Admin\AttendanceController::class);
 });
+
