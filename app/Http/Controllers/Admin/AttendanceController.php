@@ -69,6 +69,8 @@ class AttendanceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $attendance = Attendance::findOrFail($id);
+    $attendance->delete();
+    return redirect()->route('admin.attendances.index');
     }
 }
